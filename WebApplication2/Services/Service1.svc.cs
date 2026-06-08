@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WebApplication2.Services
 {
@@ -11,8 +12,24 @@ namespace WebApplication2.Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public void DoWork()
+        private internDBEntities db = new internDBEntities();
+        public void GetAllApplicants()
         {
+            var applicants = db.mockDatas.ToList();
+            foreach (var applicant in applicants)
+            {
+                Console.WriteLine(applicant);
+            }
+        }
+        public void GetApplicantByID(string ID)
+        {
+
+        }
+        public void CreateApplicant() { return; }
+        public void EditApplicant() { return; }
+        public void DeleteApplicant(string ID) {
+            return;
         }
     }
 }
+
