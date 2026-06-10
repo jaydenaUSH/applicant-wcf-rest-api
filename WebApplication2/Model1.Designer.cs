@@ -21,7 +21,7 @@ namespace WebApplication2
 {
     #region Contexts
     
-    /// <summary>
+    /// <summary>`
     /// No Metadata Documentation available.
     /// </summary>
     public partial class internDBEntities : ObjectContext

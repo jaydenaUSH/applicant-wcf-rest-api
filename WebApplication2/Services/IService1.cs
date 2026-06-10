@@ -11,16 +11,17 @@ namespace WebApplication2.Services
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
+
     public interface IService1
     {
         [OperationContract]
 
-        [WebGet(UriTemplate = "/getAllApplicants", ResponseFormat = WebMessageFormat.Json)]
-        void GetAllApplicants();
+        [WebGet(UriTemplate = "getAllApplicants",BodyStyle =WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        List<mockData> GetAllApplicants();
 
         [OperationContract]
         [WebGet(UriTemplate = "/getApplicantByID/{id}", ResponseFormat = WebMessageFormat.Json)]
-        void GetApplicantByID( string id );
+        mockData GetApplicantByID( string id );
 
         [OperationContract]
         [WebInvoke(Method="POST",UriTemplate = "/createApplicant", ResponseFormat = WebMessageFormat.Json)]
@@ -31,9 +32,12 @@ namespace WebApplication2.Services
         void EditApplicant();
 
         [OperationContract]
-        [WebInvoke(Method="DELETE", UriTemplate = "/deleteContact", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method="DELETE", UriTemplate = "deleteContact", ResponseFormat = WebMessageFormat.Json)]
         void DeleteApplicant(string ID);
 
+        [OperationContract]
+        [WebGet(UriTemplate = "test")]
+        string Test();
 
         //Operation Contract 
         //WebGet/Invoke 
