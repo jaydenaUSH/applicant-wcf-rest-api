@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.ServiceModel.Activation;
 using System.Text;
+using WebApplication3;
 
 
 namespace WebApplication2.Services
@@ -18,8 +19,8 @@ namespace WebApplication2.Services
         [OperationContract]
 
         [WebGet(UriTemplate = "getAllApplicants", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        string GetAllApplicants();
-        /*
+        List<mockData> GetAllApplicants();
+        
         [OperationContract]
         [WebGet(UriTemplate = "/getApplicantByID/{id}", ResponseFormat = WebMessageFormat.Json)]
         dynamic GetApplicantByID(string id);
@@ -39,7 +40,7 @@ namespace WebApplication2.Services
         [OperationContract]
         [WebGet(UriTemplate = "test")]
         string Test();
-        */
+        
         //Operation Contract 
         //WebGet/Invoke 
         //Funcion

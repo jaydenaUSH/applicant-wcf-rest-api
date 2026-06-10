@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication3;
 
 namespace WebApplication2.Services
 {
@@ -15,10 +16,11 @@ namespace WebApplication2.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class Service1 : IService1
     {
-        //private internDBEntities db = new internDBEntities();
-        public string GetAllApplicants()
+        private internDBEntities db = new internDBEntities();
+        public List<mockData> GetAllApplicants()
         {
-            var applicants = "AppliANT";
+
+            var applicants = db.mockDatas.ToList();
 
             return applicants;
         }
