@@ -28,17 +28,30 @@ namespace WebApplication2.Services
         public mockData GetApplicantByID(string ID)
 
         {
-            return db.mockDatas.Where(a=>a.applicant_id==ID);
+            int applicantId = Convert.ToInt32(ID);
+
+            return db.mockDatas.FirstOrDefault(a=>a.applicant_id== applicantId);
         }
         public void CreateApplicant( mockData applicants) {
-
+            
             db.mockDatas.Add(applicants);
             db.SaveChanges();
                 return; }
-        public void EditApplicant(string ID, mockData updatedInfo) { return; }
+        public void EditApplicant(string ID, mockData updatedInfo) {
+            // Find the user
+            int applicantId = Convert.ToInt32(ID);
+            var expecetdUser = db.mockDatas.FirstOrDefault(a => a.applicant_id == applicantId);
+            if (expecetdUser != null)
+            {
+                db.Entry(expecetdUser).CurrentValues.SetValues(updatedInfo);
+                db.SaveChanges();
+            }
+            return; }
         public void DeleteApplicant(string ID)
         {
-            var applicant = db.mockDatas.Where(a => a.applicant_id == ID);
+            int applicantId = Convert.ToInt32(ID);
+
+            var applicant = db.mockDatas.FirstOrDefault(a => a.applicant_id == applicantId);
             db.mockDatas.Remove(applicant);
             db.SaveChanges();
             return;
