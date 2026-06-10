@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -24,21 +25,24 @@ namespace WebApplication2.Services
 
             return applicants;
         }
-       /* public mockData GetApplicantByID(string ID)
+        public mockData GetApplicantByID(string ID)
 
         {
-
-            return db.mockDatas.FirstOrDefault();
+            return db.mockDatas.Where(a=>a.applicant_id==ID);
         }
-        public void CreateApplicant() { return; }
-        public void EditApplicant() { return; }
+        public void CreateApplicant( mockData applicants) {
+
+            db.mockDatas.Add(applicants);
+            db.SaveChanges();
+                return; }
+        public void EditApplicant(string ID, mockData updatedInfo) { return; }
         public void DeleteApplicant(string ID)
         {
+            var applicant = db.mockDatas.Where(a => a.applicant_id == ID);
+            db.mockDatas.Remove(applicant);
+            db.SaveChanges();
             return;
         }
-        public string Test()
-        {
-            return "working";
-        }*/
+        
     }
 }
