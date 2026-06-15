@@ -9,6 +9,7 @@ SSMS
 Postman
 
 ## WCF REST API Overview
+WCF REST APIs are REST APIs for Windows Communication Foundation. The structure is to have an operation contract, a WebGet for the endpoint, then the function to be executed
 
 ## Database Setup Assumptions
 The database was already created, and sample data to populate tables were generated from Mockaroo.
