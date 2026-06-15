@@ -14,7 +14,7 @@ namespace WebApplication3
     
     public partial class mockData
     {
-        public short applicant_id { get; set; }
+        public short? applicant_id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
         public string address_1 { get; set; }
@@ -28,21 +28,21 @@ namespace WebApplication3
         public string reason { get; set; }
         public string story { get; set; }
         public string gender_avatar { get; set; }
-        public bool enough_food { get; set; }
+        public bool? enough_food { get; set; }
         public byte household_size { get; set; }
         public string insecurity_frequency { get; set; }
         public string illnesses { get; set; }
-        public bool posted { get; set; }
+        public bool? posted { get; set; }
         public string source { get; set; }
         public string applicant_status { get; set; }
-        public byte priority_id { get; set; }
-        public bool health_insurance { get; set; }
+        public byte? priority_id { get; set; }
+        public bool? health_insurance { get; set; }
         public string health_plan { get; set; }
-        public byte children_in_household { get; set; }
-        public byte seniors_in_household { get; set; }
-        public bool job_loss_or_reduced_hours { get; set; }
-        public bool medical_transportation { get; set; }
-        public bool grocery_transportation { get; set; }
-        public bool dental_transportation { get; set; }
+        public byte? children_in_household { get; set; }
+        public byte? seniors_in_household { get; set; }
+        public bool? job_loss_or_reduced_hours { get; set; }
+        public bool? medical_transportation { get; set; }
+        public bool? grocery_transportation { get; set; }
+        public bool? dental_transportation { get; set; }
     }
 }

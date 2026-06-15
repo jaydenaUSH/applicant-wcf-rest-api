@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="internDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="internDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MockApplicant">
           <Key>
             <PropertyRef Name="applicant_id" />
@@ -66,38 +66,9 @@
           <Property Name="worry_food_run_out" Type="nvarchar" MaxLength="50" />
           <Property Name="education_level" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'internDB.dbo.mockData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="mockData">
           <Key>
             <PropertyRef Name="applicant_id" />
-            <PropertyRef Name="first_name" />
-            <PropertyRef Name="last_name" />
-            <PropertyRef Name="address_1" />
-            <PropertyRef Name="address_2" />
-            <PropertyRef Name="city" />
-            <PropertyRef Name="country" />
-            <PropertyRef Name="phone" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="reason" />
-            <PropertyRef Name="story" />
-            <PropertyRef Name="gender_avatar" />
-            <PropertyRef Name="enough_food" />
-            <PropertyRef Name="household_size" />
-            <PropertyRef Name="insecurity_frequency" />
-            <PropertyRef Name="illnesses" />
-            <PropertyRef Name="posted" />
-            <PropertyRef Name="source" />
-            <PropertyRef Name="applicant_status" />
-            <PropertyRef Name="priority_id" />
-            <PropertyRef Name="health_insurance" />
-            <PropertyRef Name="health_plan" />
-            <PropertyRef Name="children_in_household" />
-            <PropertyRef Name="seniors_in_household" />
-            <PropertyRef Name="job_loss_or_reduced_hours" />
-            <PropertyRef Name="medical_transportation" />
-            <PropertyRef Name="grocery_transportation" />
-            <PropertyRef Name="dental_transportation" />
           </Key>
           <Property Name="applicant_id" Type="smallint" Nullable="false" />
           <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -132,43 +103,9 @@ warning 6002: The table/view 'internDB.dbo.mockData' does not have a primary key
         </EntityType>
         <EntityContainer Name="internDBModelStoreContainer">
           <EntitySet Name="MockApplicant" EntityType="Self.MockApplicant" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="mockData" EntityType="Self.mockData" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [mockData].[applicant_id] AS [applicant_id], 
-    [mockData].[first_name] AS [first_name], 
-    [mockData].[last_name] AS [last_name], 
-    [mockData].[address_1] AS [address_1], 
-    [mockData].[address_2] AS [address_2], 
-    [mockData].[city] AS [city], 
-    [mockData].[state] AS [state], 
-    [mockData].[zip] AS [zip], 
-    [mockData].[country] AS [country], 
-    [mockData].[phone] AS [phone], 
-    [mockData].[email] AS [email], 
-    [mockData].[reason] AS [reason], 
-    [mockData].[story] AS [story], 
-    [mockData].[gender_avatar] AS [gender_avatar], 
-    [mockData].[enough_food] AS [enough_food], 
-    [mockData].[household_size] AS [household_size], 
-    [mockData].[insecurity_frequency] AS [insecurity_frequency], 
-    [mockData].[illnesses] AS [illnesses], 
-    [mockData].[posted] AS [posted], 
-    [mockData].[source] AS [source], 
-    [mockData].[applicant_status] AS [applicant_status], 
-    [mockData].[priority_id] AS [priority_id], 
-    [mockData].[health_insurance] AS [health_insurance], 
-    [mockData].[health_plan] AS [health_plan], 
-    [mockData].[children_in_household] AS [children_in_household], 
-    [mockData].[seniors_in_household] AS [seniors_in_household], 
-    [mockData].[job_loss_or_reduced_hours] AS [job_loss_or_reduced_hours], 
-    [mockData].[medical_transportation] AS [medical_transportation], 
-    [mockData].[grocery_transportation] AS [grocery_transportation], 
-    [mockData].[dental_transportation] AS [dental_transportation]
-    FROM [dbo].[mockData] AS [mockData]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="mockData" EntityType="Self.mockData" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="internDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,61 +170,38 @@ warning 6002: The table/view 'internDB.dbo.mockData' does not have a primary key
           <Property Name="worry_food_run_out" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="education_level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityContainer Name="internDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MockApplicants" EntityType="Self.MockApplicant" />
+          <EntitySet Name="mockDatas" EntityType="internDBModel.mockData" />
+        </EntityContainer>
         <EntityType Name="mockData">
           <Key>
             <PropertyRef Name="applicant_id" />
-            <PropertyRef Name="first_name" />
-            <PropertyRef Name="last_name" />
-            <PropertyRef Name="address_1" />
-            <PropertyRef Name="address_2" />
-            <PropertyRef Name="city" />
-            <PropertyRef Name="country" />
-            <PropertyRef Name="phone" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="reason" />
-            <PropertyRef Name="story" />
-            <PropertyRef Name="gender_avatar" />
-            <PropertyRef Name="enough_food" />
-            <PropertyRef Name="household_size" />
-            <PropertyRef Name="insecurity_frequency" />
-            <PropertyRef Name="illnesses" />
-            <PropertyRef Name="posted" />
-            <PropertyRef Name="source" />
-            <PropertyRef Name="applicant_status" />
-            <PropertyRef Name="priority_id" />
-            <PropertyRef Name="health_insurance" />
-            <PropertyRef Name="health_plan" />
-            <PropertyRef Name="children_in_household" />
-            <PropertyRef Name="seniors_in_household" />
-            <PropertyRef Name="job_loss_or_reduced_hours" />
-            <PropertyRef Name="medical_transportation" />
-            <PropertyRef Name="grocery_transportation" />
-            <PropertyRef Name="dental_transportation" />
           </Key>
           <Property Name="applicant_id" Type="Int16" Nullable="false" />
           <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" Unicode="true" FixedLength="false" MaxLength="50" />
           <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="reason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="story" Type="String" MaxLength="600" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gender_avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="story" Type="String" Nullable="false" MaxLength="600" FixedLength="false" Unicode="true" />
+          <Property Name="gender_avatar" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="enough_food" Type="Boolean" Nullable="false" />
           <Property Name="household_size" Type="Byte" Nullable="false" />
-          <Property Name="insecurity_frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="illnesses" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="insecurity_frequency" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="illnesses" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="posted" Type="Boolean" Nullable="false" />
-          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="applicant_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="source" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="applicant_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="priority_id" Type="Byte" Nullable="false" />
           <Property Name="health_insurance" Type="Boolean" Nullable="false" />
-          <Property Name="health_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="health_plan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="children_in_household" Type="Byte" Nullable="false" />
           <Property Name="seniors_in_household" Type="Byte" Nullable="false" />
           <Property Name="job_loss_or_reduced_hours" Type="Boolean" Nullable="false" />
@@ -295,10 +209,6 @@ warning 6002: The table/view 'internDB.dbo.mockData' does not have a primary key
           <Property Name="grocery_transportation" Type="Boolean" Nullable="false" />
           <Property Name="dental_transportation" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="internDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="MockApplicants" EntityType="Self.MockApplicant" />
-          <EntitySet Name="mockDatas" EntityType="Self.mockData" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -370,36 +280,36 @@ warning 6002: The table/view 'internDB.dbo.mockData' does not have a primary key
           <EntitySetMapping Name="mockDatas">
             <EntityTypeMapping TypeName="internDBModel.mockData">
               <MappingFragment StoreEntitySet="mockData">
-                <ScalarProperty Name="applicant_id" ColumnName="applicant_id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="reason" ColumnName="reason" />
-                <ScalarProperty Name="story" ColumnName="story" />
-                <ScalarProperty Name="gender_avatar" ColumnName="gender_avatar" />
-                <ScalarProperty Name="enough_food" ColumnName="enough_food" />
-                <ScalarProperty Name="household_size" ColumnName="household_size" />
-                <ScalarProperty Name="insecurity_frequency" ColumnName="insecurity_frequency" />
-                <ScalarProperty Name="illnesses" ColumnName="illnesses" />
-                <ScalarProperty Name="posted" ColumnName="posted" />
-                <ScalarProperty Name="source" ColumnName="source" />
-                <ScalarProperty Name="applicant_status" ColumnName="applicant_status" />
-                <ScalarProperty Name="priority_id" ColumnName="priority_id" />
-                <ScalarProperty Name="health_insurance" ColumnName="health_insurance" />
-                <ScalarProperty Name="health_plan" ColumnName="health_plan" />
-                <ScalarProperty Name="children_in_household" ColumnName="children_in_household" />
-                <ScalarProperty Name="seniors_in_household" ColumnName="seniors_in_household" />
-                <ScalarProperty Name="job_loss_or_reduced_hours" ColumnName="job_loss_or_reduced_hours" />
-                <ScalarProperty Name="medical_transportation" ColumnName="medical_transportation" />
-                <ScalarProperty Name="grocery_transportation" ColumnName="grocery_transportation" />
                 <ScalarProperty Name="dental_transportation" ColumnName="dental_transportation" />
+                <ScalarProperty Name="grocery_transportation" ColumnName="grocery_transportation" />
+                <ScalarProperty Name="medical_transportation" ColumnName="medical_transportation" />
+                <ScalarProperty Name="job_loss_or_reduced_hours" ColumnName="job_loss_or_reduced_hours" />
+                <ScalarProperty Name="seniors_in_household" ColumnName="seniors_in_household" />
+                <ScalarProperty Name="children_in_household" ColumnName="children_in_household" />
+                <ScalarProperty Name="health_plan" ColumnName="health_plan" />
+                <ScalarProperty Name="health_insurance" ColumnName="health_insurance" />
+                <ScalarProperty Name="priority_id" ColumnName="priority_id" />
+                <ScalarProperty Name="applicant_status" ColumnName="applicant_status" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="posted" ColumnName="posted" />
+                <ScalarProperty Name="illnesses" ColumnName="illnesses" />
+                <ScalarProperty Name="insecurity_frequency" ColumnName="insecurity_frequency" />
+                <ScalarProperty Name="household_size" ColumnName="household_size" />
+                <ScalarProperty Name="enough_food" ColumnName="enough_food" />
+                <ScalarProperty Name="gender_avatar" ColumnName="gender_avatar" />
+                <ScalarProperty Name="story" ColumnName="story" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="applicant_id" ColumnName="applicant_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

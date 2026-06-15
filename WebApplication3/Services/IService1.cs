@@ -20,22 +20,22 @@ namespace WebApplication2.Services
 
         [WebGet(UriTemplate = "getAllApplicants", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         List<mockData> GetAllApplicants();
-        
+            
         [OperationContract]
         [WebGet(UriTemplate = "/getApplicantByID/{id}", ResponseFormat = WebMessageFormat.Json)]
         mockData GetApplicantByID(string id);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/createApplicant", ResponseFormat = WebMessageFormat.Json)]
-        void CreateApplicant(mockData applicants);
+        string CreateApplicant(mockData applicants);
 
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "/editApplicant/{ID}", ResponseFormat = WebMessageFormat.Json)]
-        void EditApplicant(string id, mockData updatedInfo);
+        [WebInvoke(Method = "PATCH", UriTemplate = "/editApplicant/{ID}", ResponseFormat = WebMessageFormat.Json)]
+        string EditApplicant(string id, mockData updatedInfo);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", UriTemplate = "deleteContact/{ID}", ResponseFormat = WebMessageFormat.Json)]
-        void DeleteApplicant(string ID);
+        string DeleteApplicant(string ID);
 
        
         
