@@ -27,15 +27,15 @@ namespace WebApplication2.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/createApplicant", ResponseFormat = WebMessageFormat.Json)]
-        string CreateApplicant(mockData applicants);
+        void CreateApplicant(mockData applicants);
 
         [OperationContract]
         [WebInvoke(Method = "PATCH", UriTemplate = "/editApplicant/{ID}", ResponseFormat = WebMessageFormat.Json)]
-        string EditApplicant(string id, mockData updatedInfo);
+        void EditApplicant(string id, mockData updatedInfo);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", UriTemplate = "deleteContact/{ID}", ResponseFormat = WebMessageFormat.Json)]
-        string DeleteApplicant(string ID);
+        void DeleteApplicant(string ID);
 
        
         

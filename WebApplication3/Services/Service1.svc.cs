@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.EnterpriseServices.Internal;
@@ -21,19 +22,40 @@ namespace WebApplication2.Services
         private internDBEntities db = new internDBEntities();
         public List<mockData> GetAllApplicants()
         {
+            Log.Information("CRUD request GetAllApplicants() received");
 
-            var applicants = db.mockDatas.ToList();
+            try
+            {
+                var applicants = db.mockDatas.ToList();
+                Log.Information("Successful database operation");
+                return applicants;
 
-            return applicants;
+            }
+            catch (Exception ex) {
+                Log.Error(ex, "Error retreiving all applicants from database");
+                return new List<mockData>(); }
+
+
         }
         public mockData GetApplicantByID(string ID)
 
         {
-            int applicantId = Convert.ToInt32(ID);
+            Log.Information("CRUD request GetApplicantByID() received");
+            try {
+                int applicantId = Convert.ToInt32(ID);
+                return db.mockDatas.FirstOrDefault(a => a.applicant_id == applicantId);
+            } catch (Exception ex) {
+                Log.Error(ex, "There was an error getting the requested applicant from the database");
+                return new mockData();
+            }
 
-            return db.mockDatas.FirstOrDefault(a=>a.applicant_id== applicantId);
+            
         }
-        public string CreateApplicant( mockData applicants) {
+        public void CreateApplicant(mockData applicants) {
+            Log.Information("CRUD request CreateApplicant() received");
+
+            try
+            { 
             var newApplicant = new mockData
             {
                 first_name = "Mariko",
@@ -66,93 +88,129 @@ namespace WebApplication2.Services
                 grocery_transportation = true,
                 dental_transportation = false,
             };
-            if(applicants ==null)
+            if (applicants == null)
             {
                 applicants = newApplicant;
             }
 
             db.mockDatas.Add(applicants);
             db.SaveChanges();
-                return "Applicant successfully created"; }
-        public string EditApplicant(string ID, mockData updatedInfo) {
-            int applicantId = Convert.ToInt32(ID);
+             Log.Information("Applicant successfully created");
+             Log.Information("Successful database operation");
 
-            var newApplicant = new mockData
+
+            }
+            catch (Exception ex)
             {
-                first_name = "Darnell",
-                last_name = "Okafor",
-                address_1 = "1208 Sandhill Crane Dr",
-                address_2 = "Apt 304",
-                city = "Kissimmee",
-                state = "FL",
-                zip = "34741",
-                country = "United States",
-                phone = "321-555-7716",
-                email = "dokafor@example.com",
-                reason = "Reduced work hours after a warehouse closure left the household short on grocery money each month.",
-                story = "Recently took on care for an aging parent while working fewer hours.\n\nMost of the income now goes to medical costs, leaving little for consistent meals.",
-                gender_avatar = "https://robohash.org/darnellokafor",
-                enough_food = false,
-                household_size = 5,
-                insecurity_frequency = "Weekly",
-                illnesses = "Hypertension and early-stage arthritis; both managed with regular medication.",
-                posted = false,
-                source = "online",
-                applicant_status = "pending",
-                priority_id = 4,
-                health_insurance = true,
-                health_plan = "HMO",
-                children_in_household = 2,
-                seniors_in_household = 2,   
-                job_loss_or_reduced_hours = true,
-                medical_transportation = true,
-                grocery_transportation = false,
-                dental_transportation = false,
-            };
-            // Find the user
-            var expecetdUser = db.mockDatas.FirstOrDefault(a => a.applicant_id == applicantId);
-            if (expecetdUser != null)
+                Log.Error(ex, "Error inserting applicant into database");
+            }
+        } 
+        public void EditApplicant(string ID, mockData updatedInfo) {
+            Log.Information("CRUD request EditApplicant() received");
+
+            try
             {
-                if (updatedInfo == null)
+                int applicantId = Convert.ToInt32(ID);
+
+                var newApplicant = new mockData
                 {
-                    updatedInfo = newApplicant;
-                }
-                // Where there is no new value for a key make it the exisiting one
-                foreach (var prop in typeof(mockData).GetProperties())
+                    first_name = "Darnell",
+                    last_name = "Okafor",
+                    address_1 = "1208 Sandhill Crane Dr",
+                    address_2 = "Apt 304",
+                    city = "Kissimmee",
+                    state = "FL",
+                    zip = "34741",
+                    country = "United States",
+                    phone = "321-555-7716",
+                    email = "dokafor@example.com",
+                    reason = "Reduced work hours after a warehouse closure left the household short on grocery money each month.",
+                    story = "Recently took on care for an aging parent while working fewer hours.\n\nMost of the income now goes to medical costs, leaving little for consistent meals.",
+                    gender_avatar = "https://robohash.org/darnellokafor",
+                    enough_food = false,
+                    household_size = 5,
+                    insecurity_frequency = "Weekly",
+                    illnesses = "Hypertension and early-stage arthritis; both managed with regular medication.",
+                    posted = false,
+                    source = "online",
+                    applicant_status = "pending",
+                    priority_id = 4,
+                    health_insurance = true,
+                    health_plan = "HMO",
+                    children_in_household = 2,
+                    seniors_in_household = 2,
+                    job_loss_or_reduced_hours = true,
+                    medical_transportation = true,
+                    grocery_transportation = false,
+                    dental_transportation = false,
+                };
+                // Find the user
+                var expecetdUser = db.mockDatas.FirstOrDefault(a => a.applicant_id == applicantId);
+                if (expecetdUser != null)
                 {
-                    if (prop.GetValue(updatedInfo) == null)
-                        prop.SetValue(updatedInfo, prop.GetValue(expecetdUser));
-                }
+                    if (updatedInfo == null)
+                    {
+                        updatedInfo = newApplicant;
+                    }
+                    // Where there is no new value for a key make it the exisiting one
+                    foreach (var prop in typeof(mockData).GetProperties())
+                    {
+                        if (prop.GetValue(updatedInfo) == null)
+                            prop.SetValue(updatedInfo, prop.GetValue(expecetdUser));
+                    }
 
 
-                updatedInfo.applicant_id = expecetdUser.applicant_id;
-                db.Entry(expecetdUser).CurrentValues.SetValues(updatedInfo);
-                try { db.SaveChanges(); return "User successfullly updated";
-                }
+                    updatedInfo.applicant_id = expecetdUser.applicant_id;
+                    db.Entry(expecetdUser).CurrentValues.SetValues(updatedInfo);
+                    try
+                    {
+                        db.SaveChanges(); 
+                        Log.Information( "User successfullly updated");
+                    }
 
-                catch (DbEntityValidationException ex) {
-                    var errors = string.Join("\n", ex.EntityValidationErrors
-            .SelectMany(e => e.ValidationErrors)
-            .Select(e => $"Property: {e.PropertyName}, Error: {e.ErrorMessage}"));
-                    throw new Exception(errors);
+                    catch (DbEntityValidationException ex)
+                    {
+                        var errors = string.Join("\n", ex.EntityValidationErrors
+                .SelectMany(e => e.ValidationErrors)
+                .Select(e => $"Property: {e.PropertyName}, Error: {e.ErrorMessage}"));
+                        throw new Exception(errors);
+
+                    }
                 }
             }
-            return "Error updating user";
+            catch (Exception ex)
+            {
+                Log.Error(ex, "There was an error updating the user in the database"); }
         }
         
-        public string DeleteApplicant(string ID)
+        public void DeleteApplicant(string ID)
         {
-            int applicantId = Convert.ToInt32(ID);
+            Log.Information("CRUD request DeleteApplicant() received");
+
+            try
+            {
+                int applicantId = Convert.ToInt32(ID);
 
             var applicant = db.mockDatas.FirstOrDefault(a => a.applicant_id == applicantId);
             if(applicant != null) {
                 db.mockDatas.Remove(applicant);
-                db.SaveChanges();
-                return "User sucessfully deleted";
-            
+                try {
+                    db.SaveChanges();
+                       Log.Information("User sucessfully deleted");
+
+                    }
+                    catch
+                    {
+                        Log.Error("Unsucessful database operation");
+                    }
+
+                }
+                else { Log.Error("No user found"); }
+            } 
+            catch (Exception ex)
+            {
+                Log.Error(ex, "There was an error deleting the user from the database.");
             }
-            
-            return "No user found";
         }
         
     }
