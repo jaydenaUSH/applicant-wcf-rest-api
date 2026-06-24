@@ -29,7 +29,7 @@ namespace WebApplication3
         public string story { get; set; }
         public string gender_avatar { get; set; }
         public bool? enough_food { get; set; }
-        public byte household_size { get; set; }
+        public byte? household_size { get; set; }
         public string insecurity_frequency { get; set; }
         public string illnesses { get; set; }
         public bool? posted { get; set; }
