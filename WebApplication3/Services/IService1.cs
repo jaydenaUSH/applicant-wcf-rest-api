@@ -26,11 +26,11 @@ namespace WebApplication2.Services
         mockData GetApplicantByID(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/createApplicant", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "/createApplicant", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void CreateApplicant(mockData applicants);
 
         [OperationContract]
-        [WebInvoke(Method = "PATCH", UriTemplate = "/editApplicant/{ID}", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "PATCH", UriTemplate = "/editApplicant/{ID}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void EditApplicant(string id, mockData updatedInfo);
 
         [OperationContract]
