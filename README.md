@@ -204,5 +204,101 @@ To run the service locally make sure you have cloned into and have the repositor
 ## Testing with Postman
 Since this is a local build, Postman Desktop is needed to test the endpoints. I establish the connection by runnning th ecode, and then in the Postman window I send sample requests to the endpoint to see if the result I get back is expected. 
 
+---
+
+## Deployment
+
+WCF REST services are hosted in **IIS** rather than run as a standalone executable. The service is published to a folder, which is then served by an IIS site/application pool.
+
+### Deployment steps
+
+1. Pull the latest code and confirm it builds locally:
+   ```
+   git pull
+   ```
+   Then build the solution in Visual Studio (Build > Build Solution) and confirm no errors.
+2. Publish the service from Visual Studio:
+   - Right-click the project > **Publish**.
+   - Choose a **Folder** publish target (e.g. `C:\inetpub\wwwroot\ApplicantApi` or a staging folder like `C:\Deploy\ApplicantApi`).
+   - Publish in **Release** configuration.
+3. Confirm `Web.config` made it into the published output. This holds the connection string and WCF service/endpoint configuration, so the service won't run correctly without it.
+4. Copy/move the published folder to the IIS site's physical path if you published to a staging folder rather than directly into `wwwroot`.
+5. In **IIS Manager**, point a site or application at the published folder and assign it to an application pool (see **Runtime configuration notes**).
+
+### Runtime configuration notes
+
+- All configuration lives in `Web.config` — the connection string, WCF service behaviors, and endpoint bindings are loaded from here at startup.
+- The service must run under an **application pool** in IIS. The application pool's **identity** is the account the service runs as, and it's that account (not your personal dev login) that needs the SQL login — see **Required permissions**.
+- Make sure the app pool is set to the correct **.NET CLR version** (.NET Framework 4.x for a WCF service) and that **Integrated** pipeline mode is selected unless your project requires Classic.
+- After changing `Web.config`, IIS automatically recycles the app on the next request — no manual restart usually needed, but you can recycle the app pool from IIS Manager to force it.
+
+### Connection string guidance
+
+`Web.config` example (inside `<connectionStrings>`):
+```xml
+<connectionStrings>
+  <add name="DefaultConnection"
+       connectionString="Server=YOUR_SERVER;Database=internDB;Trusted_Connection=True;TrustServerCertificate=True"
+       providerName="System.Data.SqlClient" />
+</connectionStrings>
+```
+
+- The service uses Windows (`Trusted_Connection`) authentication, so no SQL login/password is stored in config.
+- Because IIS runs the service under the **application pool identity**, that identity is the account connecting to SQL Server — make sure it has a mapped SQL login (see **Required permissions**). The default `ApplicationPoolIdentity` appears to SQL Server as something like `IIS APPPOOL\<AppPoolName>`, or you can set the pool to run under a dedicated domain/service account.
+- Never commit a connection string containing a real username/password to the repo; Windows auth avoids this entirely.
+
+### Folder path setup
+
+For a folder-publish IIS deployment, the structure looks like:
+
+```
+<deploy folder>/
+  bin/                ← compiled service DLLs
+  Service1.svc
+  Web.config          ← connection string + WCF config
+```
+
+- This service doesn't create runtime folders — it only reads from / writes to the database and returns responses.
+- The folder simply needs to be a valid IIS application root with `Web.config` at its root and the compiled DLLs in `bin/`.
+
+### Required permissions
+
+- **Folder permissions**: the application pool identity needs **Read & Execute** access to the deployed folder. IIS grants this automatically when the site is created under `wwwroot`, but verify it if you deploy to a custom path.
+- **SQL Server permissions**: the application pool identity needs a SQL Server login mapped to the `internDB` database with at least `db_datareader` and `db_datawriter` (the create/edit/delete endpoints write to the DB). Map this in SSMS under Security > Logins.
+
+### Logging location
+
+- WCF can log to **IIS logs** (request-level, under `C:\inetpub\logs\LogFiles\`) and, if enabled, **WCF tracing** via `system.diagnostics` in `Web.config`, which writes a `.svclog` trace file to the path you configure.
+- For application/SQL errors, check **Windows Event Viewer** (Application log) and IIS Failed Request Tracing if enabled.
+
+### How to run/verify the deployed application
+
+1. Browse to the service base URL in a browser (replace `localhost:44351` with the deployed host):
+   ```
+   http://<server-or-host>/ApplicantApi/services/service1.svc
+   ```
+   A valid WCF service responds with the service help/metadata page.
+2. Test each endpoint in Postman against the deployed host:
+   ```
+   http://<server-or-host>/ApplicantApi/services/service1.svc/getAllApplicants
+   http://<server-or-host>/ApplicantApi/services/service1.svc/getApplicantByID/1
+   ```
+3. Confirm `getAllApplicants` returns JSON and `getApplicantByID/{id}` returns the expected single record — this proves both the IIS hosting and the SQL connection work end to end.
+4. Test a write endpoint (`createApplicant`) and confirm the success string and the new row in SSMS.
+
+### Troubleshooting notes
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Endpoints don't show up / 404 on `.svc` routes | Project not set up correctly for WCF REST, or routing/WebGet missing — same issue hit during local setup | Confirm the service is configured for `webHttpBinding` with `WebGet`/`WebInvoke` attributes and correct `UriTemplate` |
+| `HTTP 500` / service fails on every request | `Web.config` missing, malformed, or connection string wrong | Confirm `Web.config` published, validate `DefaultConnection`, check Event Viewer for the exception |
+| Login failed for user `IIS APPPOOL\...` | App pool identity has no SQL login | Map the app pool identity as a SQL login in SSMS with `db_datareader`/`db_datawriter` on `internDB` |
+| `.svc` returns "handler not registered" / page asks to download the file | WCF/HTTP Activation Windows feature not enabled in IIS | Enable **WCF Services > HTTP Activation** in Windows Features and restart IIS |
+| Works in VS but 403/access denied once deployed | App pool identity lacks Read/Execute on the deploy folder | Grant the app pool identity (or `IIS_IUSRS`) Read & Execute on the folder |
+
+### Screenshots or examples
+
+_Add a screenshot of the deployed service responding in the browser (`service1.svc` metadata page) and a Postman request hitting the deployed host returning JSON._
+
 ## Known issues or troubleshooting notes
 It's important to make sure to choose the right things when setting up the project. I didn't and ran into an issue with endpoints not showing up at all
