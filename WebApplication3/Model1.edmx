@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="internDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MockApplicant">
+          <Key>
+            <PropertyRef Name="applicant_id" />
+          </Key>
+          <Property Name="applicant_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address_1" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address_2" Type="nvarchar" MaxLength="255" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="reason" Type="nvarchar" MaxLength="100" />
+          <Property Name="story" Type="nvarchar(max)" />
+          <Property Name="gender_avatar" Type="nvarchar" MaxLength="50" />
+          <Property Name="enough_food" Type="bit" />
+          <Property Name="houshold_size" Type="int" />
+          <Property Name="insecurity_frequency" Type="nvarchar" MaxLength="50" />
+          <Property Name="illnesses" Type="nvarchar(max)" />
+          <Property Name="posted" Type="datetime" Nullable="false" />
+          <Property Name="source" Type="nvarchar" MaxLength="100" />
+          <Property Name="county" Type="nvarchar" MaxLength="50" />
+          <Property Name="applicant_status" Type="bit" />
+          <Property Name="priority_id" Type="bit" Nullable="false" />
+          <Property Name="health_insurance" Type="bit" />
+          <Property Name="health_plan" Type="nvarchar" MaxLength="300" />
+          <Property Name="children_in_household" Type="int" />
+          <Property Name="seniors_in_household" Type="int" />
+          <Property Name="job_loss_or_reduced_hours" Type="bit" />
+          <Property Name="medical_transportation" Type="bit" />
+          <Property Name="grocery_transportation" Type="bit" />
+          <Property Name="dental_transportation" Type="bit" />
+          <Property Name="internet_access" Type="bit" />
+          <Property Name="computer_in_home" Type="bit" />
+          <Property Name="referral_source" Type="nvarchar" MaxLength="255" />
+          <Property Name="lives_in_food_desert" Type="bit" />
+          <Property Name="tract_low_income" Type="bit" />
+          <Property Name="tract_poverty_rate" Type="float" />
+          <Property Name="tract_median_income" Type="float" />
+          <Property Name="preferred_language" Type="nvarchar" MaxLength="100" />
+          <Property Name="english_as_second_language" Type="bit" />
+          <Property Name="race" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ethnicity" Type="nvarchar" MaxLength="1000" />
+          <Property Name="urban" Type="bit" />
+          <Property Name="cant_afford_balanced_meals" Type="nvarchar" MaxLength="50" />
+          <Property Name="skipped_meals" Type="bit" />
+          <Property Name="benefits" Type="nvarchar(max)" />
+          <Property Name="living_situation_today" Type="nvarchar" MaxLength="500" />
+          <Property Name="problems_with_housing" Type="nvarchar" MaxLength="500" />
+          <Property Name="risk_of_losing_services" Type="nvarchar" MaxLength="50" />
+          <Property Name="want_help_with_employment" Type="nvarchar" MaxLength="150" />
+          <Property Name="how_hard_to_pay_for_basics" Type="nvarchar" MaxLength="100" />
+          <Property Name="income_bracket" Type="nvarchar" MaxLength="100" />
+          <Property Name="live_with_illness" Type="bit" />
+          <Property Name="date_of_birth" Type="date" />
+          <Property Name="worry_food_run_out" Type="nvarchar" MaxLength="50" />
+          <Property Name="education_level" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="mockData">
+          <Key>
+            <PropertyRef Name="applicant_id" />
+          </Key>
+          <Property Name="applicant_id" Type="smallint" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address_2" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" />
+          <Property Name="zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="reason" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="story" Type="nvarchar" MaxLength="600" Nullable="false" />
+          <Property Name="gender_avatar" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="enough_food" Type="bit" Nullable="false" />
+          <Property Name="household_size" Type="tinyint" Nullable="false" />
+          <Property Name="insecurity_frequency" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="illnesses" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="posted" Type="bit" Nullable="false" />
+          <Property Name="source" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="applicant_status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="priority_id" Type="tinyint" Nullable="false" />
+          <Property Name="health_insurance" Type="bit" Nullable="false" />
+          <Property Name="health_plan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="children_in_household" Type="tinyint" Nullable="false" />
+          <Property Name="seniors_in_household" Type="tinyint" Nullable="false" />
+          <Property Name="job_loss_or_reduced_hours" Type="bit" Nullable="false" />
+          <Property Name="medical_transportation" Type="bit" Nullable="false" />
+          <Property Name="grocery_transportation" Type="bit" Nullable="false" />
+          <Property Name="dental_transportation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="internDBModelStoreContainer">
+          <EntitySet Name="MockApplicant" EntityType="Self.MockApplicant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mockData" EntityType="Self.mockData" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="internDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MockApplicant">
+          <Key>
+            <PropertyRef Name="applicant_id" />
+          </Key>
+          <Property Name="applicant_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="story" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gender_avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="enough_food" Type="Boolean" />
+          <Property Name="houshold_size" Type="Int32" />
+          <Property Name="insecurity_frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="illnesses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="posted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="source" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="applicant_status" Type="Boolean" />
+          <Property Name="priority_id" Type="Boolean" Nullable="false" />
+          <Property Name="health_insurance" Type="Boolean" />
+          <Property Name="health_plan" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="children_in_household" Type="Int32" />
+          <Property Name="seniors_in_household" Type="Int32" />
+          <Property Name="job_loss_or_reduced_hours" Type="Boolean" />
+          <Property Name="medical_transportation" Type="Boolean" />
+          <Property Name="grocery_transportation" Type="Boolean" />
+          <Property Name="dental_transportation" Type="Boolean" />
+          <Property Name="internet_access" Type="Boolean" />
+          <Property Name="computer_in_home" Type="Boolean" />
+          <Property Name="referral_source" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lives_in_food_desert" Type="Boolean" />
+          <Property Name="tract_low_income" Type="Boolean" />
+          <Property Name="tract_poverty_rate" Type="Double" />
+          <Property Name="tract_median_income" Type="Double" />
+          <Property Name="preferred_language" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="english_as_second_language" Type="Boolean" />
+          <Property Name="race" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ethnicity" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="urban" Type="Boolean" />
+          <Property Name="cant_afford_balanced_meals" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="skipped_meals" Type="Boolean" />
+          <Property Name="benefits" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="living_situation_today" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="problems_with_housing" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="risk_of_losing_services" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="want_help_with_employment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="how_hard_to_pay_for_basics" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="income_bracket" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="live_with_illness" Type="Boolean" />
+          <Property Name="date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="worry_food_run_out" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="education_level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="internDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MockApplicants" EntityType="Self.MockApplicant" />
+          <EntitySet Name="mockDatas" EntityType="internDBModel.mockData" />
+        </EntityContainer>
+        <EntityType Name="mockData">
+          <Key>
+            <PropertyRef Name="applicant_id" />
+          </Key>
+          <Property Name="applicant_id" Type="Int16" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" Unicode="true" FixedLength="false" MaxLength="50" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="story" Type="String" Nullable="false" MaxLength="600" FixedLength="false" Unicode="true" />
+          <Property Name="gender_avatar" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="enough_food" Type="Boolean" Nullable="false" />
+          <Property Name="household_size" Type="Byte" Nullable="false" />
+          <Property Name="insecurity_frequency" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="illnesses" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="posted" Type="Boolean" Nullable="false" />
+          <Property Name="source" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="applicant_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="priority_id" Type="Byte" Nullable="false" />
+          <Property Name="health_insurance" Type="Boolean" Nullable="false" />
+          <Property Name="health_plan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="children_in_household" Type="Byte" Nullable="false" />
+          <Property Name="seniors_in_household" Type="Byte" Nullable="false" />
+          <Property Name="job_loss_or_reduced_hours" Type="Boolean" Nullable="false" />
+          <Property Name="medical_transportation" Type="Boolean" Nullable="false" />
+          <Property Name="grocery_transportation" Type="Boolean" Nullable="false" />
+          <Property Name="dental_transportation" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="internDBModelStoreContainer" CdmEntityContainer="internDBEntities">
+          <EntitySetMapping Name="MockApplicants">
+            <EntityTypeMapping TypeName="internDBModel.MockApplicant">
+              <MappingFragment StoreEntitySet="MockApplicant">
+                <ScalarProperty Name="applicant_id" ColumnName="applicant_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="story" ColumnName="story" />
+                <ScalarProperty Name="gender_avatar" ColumnName="gender_avatar" />
+                <ScalarProperty Name="enough_food" ColumnName="enough_food" />
+                <ScalarProperty Name="houshold_size" ColumnName="houshold_size" />
+                <ScalarProperty Name="insecurity_frequency" ColumnName="insecurity_frequency" />
+                <ScalarProperty Name="illnesses" ColumnName="illnesses" />
+                <ScalarProperty Name="posted" ColumnName="posted" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="applicant_status" ColumnName="applicant_status" />
+                <ScalarProperty Name="priority_id" ColumnName="priority_id" />
+                <ScalarProperty Name="health_insurance" ColumnName="health_insurance" />
+                <ScalarProperty Name="health_plan" ColumnName="health_plan" />
+                <ScalarProperty Name="children_in_household" ColumnName="children_in_household" />
+                <ScalarProperty Name="seniors_in_household" ColumnName="seniors_in_household" />
+                <ScalarProperty Name="job_loss_or_reduced_hours" ColumnName="job_loss_or_reduced_hours" />
+                <ScalarProperty Name="medical_transportation" ColumnName="medical_transportation" />
+                <ScalarProperty Name="grocery_transportation" ColumnName="grocery_transportation" />
+                <ScalarProperty Name="dental_transportation" ColumnName="dental_transportation" />
+                <ScalarProperty Name="internet_access" ColumnName="internet_access" />
+                <ScalarProperty Name="computer_in_home" ColumnName="computer_in_home" />
+                <ScalarProperty Name="referral_source" ColumnName="referral_source" />
+                <ScalarProperty Name="lives_in_food_desert" ColumnName="lives_in_food_desert" />
+                <ScalarProperty Name="tract_low_income" ColumnName="tract_low_income" />
+                <ScalarProperty Name="tract_poverty_rate" ColumnName="tract_poverty_rate" />
+                <ScalarProperty Name="tract_median_income" ColumnName="tract_median_income" />
+                <ScalarProperty Name="preferred_language" ColumnName="preferred_language" />
+                <ScalarProperty Name="english_as_second_language" ColumnName="english_as_second_language" />
+                <ScalarProperty Name="race" ColumnName="race" />
+                <ScalarProperty Name="ethnicity" ColumnName="ethnicity" />
+                <ScalarProperty Name="urban" ColumnName="urban" />
+                <ScalarProperty Name="cant_afford_balanced_meals" ColumnName="cant_afford_balanced_meals" />
+                <ScalarProperty Name="skipped_meals" ColumnName="skipped_meals" />
+                <ScalarProperty Name="benefits" ColumnName="benefits" />
+                <ScalarProperty Name="living_situation_today" ColumnName="living_situation_today" />
+                <ScalarProperty Name="problems_with_housing" ColumnName="problems_with_housing" />
+                <ScalarProperty Name="risk_of_losing_services" ColumnName="risk_of_losing_services" />
+                <ScalarProperty Name="want_help_with_employment" ColumnName="want_help_with_employment" />
+                <ScalarProperty Name="how_hard_to_pay_for_basics" ColumnName="how_hard_to_pay_for_basics" />
+                <ScalarProperty Name="income_bracket" ColumnName="income_bracket" />
+                <ScalarProperty Name="live_with_illness" ColumnName="live_with_illness" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="worry_food_run_out" ColumnName="worry_food_run_out" />
+                <ScalarProperty Name="education_level" ColumnName="education_level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mockDatas">
+            <EntityTypeMapping TypeName="internDBModel.mockData">
+              <MappingFragment StoreEntitySet="mockData">
+                <ScalarProperty Name="dental_transportation" ColumnName="dental_transportation" />
+                <ScalarProperty Name="grocery_transportation" ColumnName="grocery_transportation" />
+                <ScalarProperty Name="medical_transportation" ColumnName="medical_transportation" />
+                <ScalarProperty Name="job_loss_or_reduced_hours" ColumnName="job_loss_or_reduced_hours" />
+                <ScalarProperty Name="seniors_in_household" ColumnName="seniors_in_household" />
+                <ScalarProperty Name="children_in_household" ColumnName="children_in_household" />
+                <ScalarProperty Name="health_plan" ColumnName="health_plan" />
+                <ScalarProperty Name="health_insurance" ColumnName="health_insurance" />
+                <ScalarProperty Name="priority_id" ColumnName="priority_id" />
+                <ScalarProperty Name="applicant_status" ColumnName="applicant_status" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="posted" ColumnName="posted" />
+                <ScalarProperty Name="illnesses" ColumnName="illnesses" />
+                <ScalarProperty Name="insecurity_frequency" ColumnName="insecurity_frequency" />
+                <ScalarProperty Name="household_size" ColumnName="household_size" />
+                <ScalarProperty Name="enough_food" ColumnName="enough_food" />
+                <ScalarProperty Name="gender_avatar" ColumnName="gender_avatar" />
+                <ScalarProperty Name="story" ColumnName="story" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="applicant_id" ColumnName="applicant_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
